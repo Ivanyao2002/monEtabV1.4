@@ -1,0 +1,76 @@
+{% load static %}
+<!Doctype html>
+<html lang="fr">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport"/>
+    <link rel="icon" href="{% static 'assets/img/kaiadmin/favicon.ico' %}" type="image/x-icon"/>
+
+    <!-- Fonts and icons -->
+    <script src="{% static 'assets/js/plugin/webfont/webfont.min.js' %}"></script>
+    <script>
+      WebFont.load({
+        google: { families: ["Public Sans:300,400,500,600,700"] },
+        custom: {
+          families: [
+            "Font Awesome 5 Solid",
+            "Font Awesome 5 Regular",
+            "Font Awesome 5 Brands",
+            "simple-line-icons",
+          ],
+          urls: ["{% static 'assets/css/fonts.min.css' %}"],
+        },
+        active: function () {
+          sessionStorage.fonts = true;
+        },
+      });
+    </script>
+
+    <script type="text/javascript">
+        // Définir les chemins d'image comme variables JavaScript globales
+        var logoAssini = "{% static 'assets/img/kaiadmin/logo_light.png' %}";
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/plugins.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/kaiadmin.min.css' %}" />
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="{% static 'assets/css/demo.css' %}" />
+    {% block title %}
+        <title>Kaiadmin - MonEtab</title>
+    {% endblock title %}
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+            {% include 'partials/sidebar.html' %}
+        <!-- End Sidebar -->
+
+        <!-- main -->
+        <div class="main-panel">
+            <!-- Header -->
+                {% include 'partials/header.html' %}
+            <!-- End Header -->
+
+            <!-- Container -->
+                {% block container %}
+                    {% include 'partials/container.html' %}
+                {% endblock container %}
+            <!-- End Container -->
+
+            <!-- Footer -->
+                {% include 'partials/footer.html' %}
+            <!-- End Footer -->
+        </div>
+        <!--  End main  -->
+
+        <!-- Custom settings -->
+            {% include 'partials/custom.html' %}
+        <!-- End Custom settings -->
+    </div>
+    <!--  All scripts  -->
+    {% include 'partials/scripts.html' %}
+</body>
+</html>
