@@ -6,7 +6,7 @@ from base.models.helpers.date_time_model import DateTimeModel
 
 class RoleUserModel(DateTimeModel):
 
-    user_id = models.ForeignKey("user.UserModel", on_delete=models.CASCADE, related_name="role_user_user_ids")
+    user = models.ForeignKey("user.UserModel", on_delete=models.CASCADE, related_name="role_user_user_ids")
     role = models.CharField(max_length=255, verbose_name="Rôle de l'utilisateur ")
 
     def __str__(self):

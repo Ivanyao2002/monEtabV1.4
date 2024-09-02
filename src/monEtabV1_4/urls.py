@@ -18,10 +18,16 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from base.views import index
 
 urlpatterns = [
-    path('', index, name='index'),
+    path('', include('dashboard.urls')),
+    path('setting/', include('setting.urls')),
+    path('user/', include('user.urls.user')),
+    path('adress/', include('user.urls.adress')),
+    path('teacher/', include('school.urls.teacher')),
+    path('student/', include('school.urls.student')),
+    path('student-cards/', include('school.urls.student_cards')),
+    path('school/', include('school.urls.school')),
+    path('absence/', include('school.urls.absence')),
     path('admin/', admin.site.urls),
-    path('teacher/', include('school.urls')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

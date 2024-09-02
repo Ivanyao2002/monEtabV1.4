@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>MonEtab - Adress</title>
+{% endblock title %}
+
+<!-- Container -->
+{% block container %}
+
+    <div class="container">
+        <div class="page-inner">
+            <div class="page-header">
+                <h3 class="fw-bold mb-3">{{ title }}</h3>
+                <ul class="breadcrumbs mb-3">
+                    <li class="nav-home">
+                        <a href="/">
+                            <i class="icon-home"></i>
+                        </a>
+                    </li>
+                    <li class="separator">
+                        <i class="icon-arrow-right"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">Adresse</a>
+                    </li>
+                    <li class="separator">
+                        <i class="icon-arrow-right"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">{{ h1 }}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center">
+                                <div class="card-title">{{ h1 }}</div>
+                                <button class="btn btn-primary btn-round ms-auto"  id="listButton" >
+                                    <i class="icon-list"></i>
+                                    Listes des Adresses
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <form method="POST" id="birth-form" action="">
+                                {% csrf_token %}
+                                
+                                {{ form|crispy }}
+
+                                <div class="card-footer">
+                                    <div class="form-group row">
+                                        <div class="col-lg-3 col-md-3 col-sm-12"></div>
+                                        <div class="col-lg-4 col-md-9 col-sm-12">
+                                            <button type="submit" class="btn btn-success"> {{submit_value}} </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock container %}
+<!-- End Container -->
+
+{% block script %}
+    <script>
+        $(document).ready(function () {
+            $('#listButton').click(function () {
+                window.location.href = "{% url 'adress:list_adress' %}";
+            });
+        });
+    </script>
+{% endblock script %}

@@ -6,9 +6,7 @@ from base.models.person import PersonModel
 
 class TeacherModel(PersonModel):
 
-    user_id = models.OneToOneField("user.UserModel", on_delete=models.CASCADE, related_name="teacher_user_ids")
-    adress_id = models.OneToOneField("user.AdressModel", on_delete=models.CASCADE, related_name="teacher_adress_ids")
-    available = models.CharField(default=True, verbose_name="Disponible ")  
+    available = models.BooleanField(default=True, verbose_name="Disponible ")  
     speciality = models.CharField(max_length=50, verbose_name="Spécialité ")  
 
 

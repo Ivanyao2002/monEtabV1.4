@@ -6,7 +6,9 @@ from django.contrib.auth.models import AbstractUser
 
 class UserModel(AbstractUser):
 
-    school_id = models.ForeignKey("school.SchoolModel", on_delete=models.CASCADE, null=True, related_name="user_school_ids")  
+    school = models.ForeignKey("school.SchoolModel", on_delete=models.CASCADE, null=True, related_name="user_school_ids")  
+    teacher = models.OneToOneField("school.TeacherModel", on_delete=models.CASCADE, blank=True, null=True, related_name="user_teacher_ids")
+    student = models.OneToOneField("school.StudentModel", on_delete=models.CASCADE, blank=True, null=True, related_name="user_student_ids")
 
 
     def __str__(self):

@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>MonEtab - Student Cards</title>
+{% endblock title %}
+
+<!-- Container -->
+{% block container %}
+
+    <div class="container">
+        <div class="page-inner">
+            <div class="page-header">
+                <h3 class="fw-bold mb-3">Liste des Carte Elèves</h3>
+                <ul class="breadcrumbs mb-3">
+                    <li class="nav-home">
+                        <a href="/">
+                            <i class="icon-home"></i>
+                        </a>
+                    </li>
+                    <li class="separator">
+                        <i class="icon-arrow-right"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">Carte Elève</a>
+                    </li>
+                    <li class="separator">
+                        <i class="icon-arrow-right"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">Liste des Carte Elèves</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center">
+                                <h4 class="card-title">Carte Elèves</h4>
+                                <button class="btn btn-primary btn-round ms-auto"  id="addButton" >
+                                    <i class="fa fa-plus"></i>
+                                    Ajouter une Carte Elève
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="table-responsive">
+                                <table id="add-row" class="display table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Nom de l'élève</th>
+                                            <th>Référence</th>
+                                            <th>Date d'issue</th>
+                                            <th>Date d'expiration</th>
+                                            <th style="width: 10%">Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tfoot>
+                                        <tr>
+                                            <th>Nom de l'élève</th>
+                                            <th>Référence</th>
+                                            <th>Date d'issue</th>
+                                            <th>Date d'expiration</th>
+                                            <th style="width: 10%">Action</th>
+                                        </tr>   
+                                    </tfoot>
+                                    <tbody>
+                                    {% for student_card in student_cards %}
+                                        <tr>
+                                            <td>{{ student_card.student.first_name|capfirst }} {{ student_card.student.last_name|capfirst }}</td>
+                                            <td>{{ student_card.reference|capfirst}}</td>
+                                            <td>{{ student_card.issue_date|date:"D d M Y"}}</td>
+                                            <td>{{ student_card.expiration_date|date:"D d M Y"}}</td>
+                                            <td>
+                                                <div class="form-button-action">
+                                                    <button type="button" data-bs-toggle="tooltip" title="Modifier" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
+                                                        <a href="{% url 'student_cards:edit_student_card' student_card.id  %}">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                    </button>
+                                                    <button type="button" data-bs-toggle="tooltip" data-id="{{student_card.id}}" onclick="showModal(this)" title="Supprimer" class="btn btn-link btn-danger" data-original-title="Remove">
+                                                        <a href="">
+                                                            <i class="icon-trash"></i>
+                                                        </a>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h2>ATTENTION !!</h2>
+            <p>Voulez-vous vraiment supprimer ce professeur ?</p>
+            <button onclick="closeModal()">Non</button>
+            <button onclick="confirmDelete()">Oui</button>
+        </div>
+    </div>
+{% endblock container %}
+<!-- End Container -->
+
+{% block script %}
+    <script>
+        $(document).ready(function () {
+            $('#addButton').click(function () {
+                window.location.href = "{% url 'student_cards:add_student_card' %}";
+            });
+
+            $('#add-row').DataTable({
+            pageLength: 5,
+        });
+        });
+    </script>
+
+    <script>
+        let Id;
+
+        function showModal(buttonElement) {
+            Id = buttonElement.getAttribute('data-id');  
+            document.getElementById('modal').style.display = 'flex';  
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';     
+        }
+
+        function confirmDelete() {
+            closeModal();
+            window.location.href = "{% url 'student_cards:delete_student_card' 0 %}".replace(0, Id);
+        }
+    </script>
+{% endblock script %}

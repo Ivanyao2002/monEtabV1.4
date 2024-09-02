@@ -6,7 +6,7 @@ from base.models.helpers.date_time_model import DateTimeModel
 
 class AbsenceModel(DateTimeModel):
 
-    student_id = models.ForeignKey("school.StudentModel", on_delete=models.CASCADE, related_name="absence_student_ids")
+    student = models.ForeignKey("school.StudentModel", on_delete=models.CASCADE, related_name="absence_student_ids")
     absence_date = models.DateField(verbose_name="Date de l'absence ")  
     absence_number = models.IntegerField(verbose_name="Nombre d'absence ")  
 

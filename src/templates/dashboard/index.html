@@ -1,0 +1,243 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+<!-- Container -->
+{% block container %}
+
+    <div class="container">
+        <div class="page-inner">
+            <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+                <div>
+                <h3 class="fw-bold mb-3">Tableau de bord</h3>
+                <h6 class="op-7 mb-2">Application de gestion d'établissement </h6>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="col-sm-6 col-md-4">
+                    <div class="card card-stats card-primary card-round">
+                        <div class="card-body">
+                        <div class="row">
+                            <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            </div>
+                            <div class="col-7 col-stats">
+                            <div class="numbers">
+                                <p class="card-category">Nombre d'utilisateurs</p>
+                                <h4 class="card-title">{{ all_users }}</h4>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="card card-stats card-info card-round">
+                        <div class="card-body">
+                        <div class="row">
+                            <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="fas fa-user-check"></i>
+                            </div>
+                            </div>
+                            <div class="col-7 col-stats">
+                            <div class="numbers">
+                                <p class="card-category">Nombre d'élèves</p>
+                                <h4 class="card-title">{{ all_students }}</h4>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="card card-stats card-success card-round">
+                        <div class="card-body">
+                        <div class="row">
+                            <div class="col-5">
+                            <div class="icon-big text-center">
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                            </div>
+                            <div class="col-7 col-stats">
+                            <div class="numbers">
+                                <p class="card-category">Nombre de professeurs</p>
+                                <h4 class="card-title">{{ all_teachers }}</h4>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="card">
+                        <!-- <div class="card-header">
+                            <div class="card-title">Pie Chart</div>
+                        </div> -->
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas
+                                id="pieChart"
+                                style="width: 50%; height: 50%"
+                                ></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card card-stats card-round">
+                                <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-icon">
+                                    <div
+                                        class="icon-big text-center icon-primary bubble-shadow-small"
+                                    >
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    </div>
+                                    <div class="col col-stats ms-3 ms-sm-0">
+                                    <div class="numbers">
+                                        <p class="card-category">Total absences</p>
+                                        <h4 class="card-title">{{ all_absences }}</h4>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card card-stats card-round">
+                                <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-icon">
+                                    <div
+                                        class="icon-big text-center icon-info bubble-shadow-small"
+                                    >
+                                        <i class="fas fa-user-check"></i>
+                                    </div>
+                                    </div>
+                                    <div class="col col-stats ms-3 ms-sm-0">
+                                    <div class="numbers">
+                                        <p class="card-category">Total écoles</p>
+                                        <h4 class="card-title">{{ all_schools }}</h4>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card card-stats card-round">
+                                <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-icon">
+                                    <div
+                                        class="icon-big text-center icon-success bubble-shadow-small"
+                                    >
+                                        <i class="fas fa-luggage-cart"></i>
+                                    </div>
+                                    </div>
+                                    <div class="col col-stats ms-3 ms-sm-0">
+                                    <div class="numbers">
+                                        <p class="card-category">Total cartes élève</p>
+                                        <h4 class="card-title">{{ all_student_cards }}</h4>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-6">
+                            <div class="card card-stats card-round">
+                                <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-icon">
+                                    <div
+                                        class="icon-big text-center icon-secondary bubble-shadow-small"
+                                    >
+                                        <i class="far fa-check-circle"></i>
+                                    </div>
+                                    </div>
+                                    <div class="col col-stats ms-3 ms-sm-0">
+                                    <div class="numbers">
+                                        <p class="card-category">Total écoles</p>
+                                        <h4 class="card-title">{{ all_students }}</h4>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+{% endblock container %}
+<!-- End Container -->
+
+{% block script %}
+  <script>
+    var pieChart = document.getElementById("pieChart").getContext("2d")
+
+    var myPieChart = new Chart(pieChart, {
+        type: "pie",
+        data: {
+          datasets: [
+            {
+              data: [{{ all_students_man }}, {{ all_students_woman }}, {{ all_students_other }}],
+              backgroundColor: ["#1d7af3", "#f3545d", "#fdaf4b"],
+              borderWidth: 0,
+            },
+          ],
+          labels: ["Homme", "Femme", "Autre"],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          legend: {
+            position: "bottom",
+            labels: {
+              fontColor: "rgb(154, 154, 154)",
+              fontSize: 11,
+              usePointStyle: true,
+              padding: 20,
+            },
+          },
+          title: {
+            display: true,
+            text: "Répartition des élèves par genre"
+          },
+          pieceLabel: {
+            render: "percentage",
+            fontColor: "white",
+            fontSize: 14,
+          },
+          tooltips: false,
+          layout: {
+            padding: {
+              left: 20,
+              right: 20,
+              top: 20,
+              bottom: 20,
+            },
+          },
+        },
+      });
+
+  </script>
+{% endblock script %}
