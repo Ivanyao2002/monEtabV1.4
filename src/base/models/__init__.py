@@ -1,2 +1,2 @@
-from . import person
-from . import gender
+from . import adress_model
+from . import gender_ennum

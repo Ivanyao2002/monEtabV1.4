@@ -9,6 +9,13 @@
 
     <div class="container">
         <div class="page-inner">
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert-success" style="color: rgb(0, 255, 13);">{{ message }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
             <div class="page-header">
                 <h3 class="fw-bold mb-3">Liste des Professeurs</h3>
                 <ul class="breadcrumbs mb-3">
@@ -78,7 +85,7 @@
                                             <td>{{ teacher.first_name|capfirst }}</td>
                                             <td>{{ teacher.last_name|capfirst }}</td>
                                             <td>{{ teacher.speciality|capfirst}}</td>
-                                            <td>{{ teacher.available}}</td>
+                                            <td>{% if teacher.available %} OUI {% else %} NON {% endif %}</td>
                                             <td>{{ teacher.gender|capfirst}}</td>
                                             <td>{{ teacher.birthday|date:"D d M Y"}}</td>
                                             <td>{{ teacher.phone_number}}</td>
@@ -90,9 +97,7 @@
                                                         </a>
                                                     </button>
                                                     <button type="button" data-bs-toggle="tooltip" data-id="{{teacher.id}}" onclick="showModal(this)" title="Supprimer" class="btn btn-link btn-danger" data-original-title="Remove">
-                                                        <a href="">
                                                             <i class="icon-trash"></i>
-                                                        </a>
                                                     </button>
                                                 </div>
                                             </td>
@@ -107,7 +112,18 @@
             </div>
         </div>
     </div>
-    <div class="modal" id="modal">
+    <div class="modal" id="modal" style="position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 300px;
+    text-align: center;
+    animation: fadeIn 0.3s ease-out;">
         <div class="modal-content">
             <h2>ATTENTION !!</h2>
             <p>Voulez-vous vraiment supprimer ce professeur ?</p>

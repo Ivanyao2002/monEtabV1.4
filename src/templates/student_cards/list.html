@@ -9,6 +9,13 @@
 
     <div class="container">
         <div class="page-inner">
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert-success" style="color: rgb(0, 255, 13);">{{ message }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
             <div class="page-header">
                 <h3 class="fw-bold mb-3">Liste des Carte Elèves</h3>
                 <ul class="breadcrumbs mb-3">
@@ -81,9 +88,7 @@
                                                         </a>
                                                     </button>
                                                     <button type="button" data-bs-toggle="tooltip" data-id="{{student_card.id}}" onclick="showModal(this)" title="Supprimer" class="btn btn-link btn-danger" data-original-title="Remove">
-                                                        <a href="">
-                                                            <i class="icon-trash"></i>
-                                                        </a>
+                                                        <i class="icon-trash"></i>
                                                     </button>
                                                 </div>
                                             </td>

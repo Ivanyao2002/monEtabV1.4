@@ -1,3 +1,2 @@
-from . import adress
-from . import role_user
-from . import user
+from . import role_user_model
+from . import user_model

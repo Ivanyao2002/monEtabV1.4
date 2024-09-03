@@ -1,5 +1,2 @@
-from . import absence
-from . import school
-from . import student_cards
-from . import student
-from . import teacher
+from . import school_model
+from . import app_settings_model

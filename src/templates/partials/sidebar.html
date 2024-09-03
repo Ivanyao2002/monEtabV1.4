@@ -78,48 +78,50 @@
                                 </a>
                             </li>
 
-                            <li>
-                                <a data-bs-toggle="collapse" href="#subnav1">
-                                    <span class="sub-item"> Carte Elève</span>
-                                    <span class="caret"></span>
-                                </a>
-                                <div class="collapse" id="subnav1">
-                                    <ul class="nav nav-collapse subnav">
-                                        <li>
-                                            <a href="{% url 'student_cards:add_student_card' %}">
-                                                <span class="sub-item"> Nouvelle Carte </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'student_cards:list_student_card' %}">
-                                                <span class="sub-item"> Liste des Cartes </span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
+                        </ul>
+                    </div>
+                </li>
 
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#mserv">
+                        <i class="fas fa-layer-group"></i>
+                        <p> Carte Elève </p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="mserv">
+                        <ul class="nav nav-collapse">
                             <li>
-                                <a data-bs-toggle="collapse" href="#subnav2">
-                                    <span class="sub-item"> Absence</span>
-                                    <span class="caret"></span>
+                                <a href="{% url 'student_cards:add_student_card' %}">
+                                    <span class="sub-item">Nouvelle Carte</span>
                                 </a>
-                                <div class="collapse" id="subnav2">
-                                    <ul class="nav nav-collapse subnav">
-                                        <li>
-                                            <a href="{% url 'absence:add_absence' %}">
-                                                <span class="sub-item"> Nouvelle Absence </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'absence:list_absence' %}">
-                                                <span class="sub-item"> Liste des Absences </span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
                             </li>
+                            <li>
+                                <a href="{% url 'student_cards:list_student_card' %}">
+                                    <span class="sub-item">Liste des Cartes</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
 
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#sub">
+                        <i class="fas fa-layer-group"></i>
+                        <p> Absence </p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="sub">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="{% url 'absence:add_absence' %}">
+                                    <span class="sub-item">Nouvelle Absence</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'absence:list_absence' %}">
+                                    <span class="sub-item">Liste des Absences</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -162,6 +164,50 @@
                             <li>
                                 <a href="{% url 'adress:list_adress' %}">
                                     <span class="sub-item">Liste des Adresses</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#mapee">
+                        <i class="fas fa-layer-group"></i>
+                        <p> Rôle Utilisateur </p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="mapee">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="{% url 'role_user:add_role_user' %}">
+                                    <span class="sub-item">Nouveau rôle</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'role_user:list_role_user' %}">
+                                    <span class="sub-item">Liste des rôles</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#mpee">
+                        <i class="fas fa-layer-group"></i>
+                        <p> Utilisateur </p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="mpee">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="{% url 'user:add_user' %}">
+                                    <span class="sub-item">Nouvel Utilisateur</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'user:list_user' %}">
+                                    <span class="sub-item">Liste des Utilisateurs</span>
                                 </a>
                             </li>
                         </ul>

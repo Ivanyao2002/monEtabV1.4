@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from user.models.user import UserModel
-from school.models.teacher import TeacherModel
-from school.models.school import SchoolModel
-from school.models.student import StudentModel
-from school.models.student_cards import StudentCardsModel
-from school.models.absence import AbsenceModel
+from user.models.user_model import UserModel
+from teacher.models.teacher_model import TeacherModel
+from school.models.school_model import SchoolModel
+from student.models.student_model import StudentModel
+from student.models.student_cards_model import StudentCardsModel
+from student.models.absence_model import AbsenceModel
 
 
 # Create your views here.

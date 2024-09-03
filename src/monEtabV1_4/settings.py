@@ -46,8 +46,9 @@ INSTALLED_APPS = [
     'base.apps.BaseConfig',
     'user.apps.UserConfig',
     'school.apps.SchoolConfig',
-    'setting.apps.SettingConfig',
     'dashboard.apps.DashboardConfig',
+    'student.apps.StudentConfig',
+    'teacher.apps.TeacherConfig',
 ]
 
 MIDDLEWARE = [

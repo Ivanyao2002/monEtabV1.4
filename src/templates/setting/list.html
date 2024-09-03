@@ -9,6 +9,13 @@
 
     <div class="container">
         <div class="page-inner">
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert-success" style="color: rgb(0, 255, 13);">{{ message }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
             <div class="page-header">
                 <h3 class="fw-bold mb-3">Liste des Paramètres d'application</h3>
                 <ul class="breadcrumbs mb-3">
@@ -49,7 +56,6 @@
                                 <table id="add-row" class="display table table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Ecole</th>
                                             <th>Server SMTP</th>
                                             <th>Port SMTP</th>
                                             <th>Nom d'utilisateur SMTP</th>
@@ -59,7 +65,6 @@
 
                                     <tfoot>
                                         <tr>
-                                            <th>Ecole</th>
                                             <th>Server SMTP</th>
                                             <th>Port SMTP</th>
                                             <th>Nom d'utilisateur SMTP</th>
@@ -69,7 +74,6 @@
                                     <tbody>
                                     {% for setting in settings %}
                                         <tr>
-                                            <td>{{ setting.school.name|capfirst }}</td>
                                             <td>{{ setting.smtp_server|capfirst}}</td>
                                             <td>{{ setting.smtp_port }}</td>
                                             <td>{{ setting.smtp_username|capfirst }}</td>
@@ -81,9 +85,7 @@
                                                         </a>
                                                     </button>
                                                     <button type="button" data-bs-toggle="tooltip" data-id="{{setting.id}}" onclick="showModal(this)" title="Supprimer" class="btn btn-link btn-danger" data-original-title="Remove">
-                                                        <a href="">
-                                                            <i class="icon-trash"></i>
-                                                        </a>
+                                                        <i class="icon-trash"></i>
                                                     </button>
                                                 </div>
                                             </td>
@@ -116,7 +118,7 @@
                 window.location.href = "{% url 'setting:add_setting' %}";
             });
             $('#add-row').DataTable({
-            pageLength: 5,
+            pageLength: 4,
             });
         });
     </script>

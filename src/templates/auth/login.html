@@ -20,7 +20,9 @@
                     {% if messages %}
                     <div class="messages">
                         {% for message in messages %}
-                            <div class="{{ message.tags }}" style="color: red;">{{ message }}</div>
+                            {% if message.error %}
+                                <div class="{{ message.tags }}" style="color: red;">{{ message }}</div>
+                            {% endif %}
                         {% endfor %}
                     </div>
                     {% endif %}

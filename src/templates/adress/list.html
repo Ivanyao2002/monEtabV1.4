@@ -9,6 +9,13 @@
 
     <div class="container">
         <div class="page-inner">
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert-success" style="color: rgb(0, 255, 13);">{{ message }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
             <div class="page-header">
                 <h3 class="fw-bold mb-3">Liste des Adresses</h3>
                 <ul class="breadcrumbs mb-3">
@@ -49,8 +56,6 @@
                                 <table id="add-row" class="display table table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Nom de l'élève</th>
-                                            <th>Nom du professeur</th>
                                             <th>Pays</th>
                                             <th>Ville</th>
                                             <th>Quartier</th>
@@ -60,8 +65,6 @@
 
                                     <tfoot>
                                         <tr>
-                                            <th>Nom de l'élève</th>
-                                            <th>Nom du professeur</th>
                                             <th>Pays</th>
                                             <th>Ville</th>
                                             <th>Quartier</th>
@@ -71,8 +74,6 @@
                                     <tbody>
                                     {% for adresse in adresses %}
                                         <tr>
-                                            <td>{{ adresse.student.first_name|capfirst }} {{ adresse.student.last_name|capfirst }}</td>
-                                            <td>{{ adresse.teacher.first_name|capfirst }} {{ adresse.teacher.last_name|capfirst }}</td>
                                             <td>{{ adresse.country|capfirst}}</td>
                                             <td>{{ adresse.city|capfirst}}</td>
                                             <td>{{ adresse.street|capfirst}}</td>
@@ -120,7 +121,7 @@
             });
 
             $('#add-row').DataTable({
-            pageLength: 5,
+            pageLength: 4,
             });
         });
     </script>

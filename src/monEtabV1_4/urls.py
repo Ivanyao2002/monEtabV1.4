@@ -21,13 +21,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', include('dashboard.urls')),
-    path('setting/', include('setting.urls')),
-    path('user/', include('user.urls.user')),
-    path('adress/', include('user.urls.adress')),
-    path('teacher/', include('school.urls.teacher')),
-    path('student/', include('school.urls.student')),
-    path('student-cards/', include('school.urls.student_cards')),
-    path('school/', include('school.urls.school')),
-    path('absence/', include('school.urls.absence')),
+    path('user/', include('user.urls')),
+    path('adress/', include('base.urls')),
+    path('teacher/', include('teacher.urls')),
+    path('student/', include('student.urls')),
+    path('school/', include('school.urls')),
     path('admin/', admin.site.urls),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

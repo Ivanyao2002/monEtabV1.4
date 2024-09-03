@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>MonEtab - Role User</title>
+{% endblock title %}
+
+<!-- Container -->
+{% block container %}
+
+    <div class="container">
+        <div class="page-inner">
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert-success" style="color: rgb(0, 255, 13);">{{ message }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <div class="page-header">
+                <h3 class="fw-bold mb-3">Liste des Rôle Utilisateurs</h3>
+                <ul class="breadcrumbs mb-3">
+                    <li class="nav-home">
+                        <a href="/">
+                            <i class="icon-home"></i>
+                        </a>
+                    </li>
+                    <li class="separator">
+                        <i class="icon-arrow-right"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">Rôle Utilisateur</a>
+                    </li>
+                    <li class="separator">
+                        <i class="icon-arrow-right"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">Liste des Rôle Utilisateurs</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center">
+                                <h4 class="card-title">Rôle Utilisateurs</h4>
+                                <button class="btn btn-primary btn-round ms-auto"  id="addButton" >
+                                    <i class="fa fa-plus"></i>
+                                    Ajouter un Rôle Utilisateur
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="table-responsive">
+                                <table id="add-row" class="display table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Nom du rôle de l'utilisateur</th>
+                                            <th style="width: 10%">Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tfoot>
+                                        <tr>
+                                            <th>Nom du rôle de l'utilisateur</th>
+                                            <th style="width: 10%">Action</th>
+                                        </tr>   
+                                    </tfoot>
+                                    <tbody>
+                                    {% for role_user in role_users %}
+                                        <tr>
+                                            <td>{{ role_user.role|capfirst }}</td>
+                                            <td>
+                                                <div class="form-button-action">
+                                                    <button type="button" data-bs-toggle="tooltip" title="Modifier" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
+                                                        <a href="{% url 'role_user:edit_role_user' role_user.id  %}">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                    </button>
+                                                    <button type="button" data-bs-toggle="tooltip" data-id="{{role_user.id}}" onclick="showModal(this)" title="Supprimer" class="btn btn-link btn-danger" data-original-title="Remove">
+                                                        <i class="icon-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h2>ATTENTION !!</h2>
+            <p>Voulez-vous vraiment supprimer ce rôle ?</p>
+            <button onclick="closeModal()">Non</button>
+            <button onclick="confirmDelete()">Oui</button>
+        </div>
+    </div>
+{% endblock container %}
+<!-- End Container -->
+
+{% block script %}
+    <script>
+        $(document).ready(function () {
+            $('#addButton').click(function () {
+                window.location.href = "{% url 'role_user:add_role_user' %}";
+            });
+            $('#add-row').DataTable({
+            pageLength: 4,
+            });
+        });
+    </script>
+    <script>
+        let Id;
+
+        function showModal(buttonElement) {
+            Id = buttonElement.getAttribute('data-id');  
+            document.getElementById('modal').style.display = 'flex';  
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';     
+        }
+
+        function confirmDelete() {
+            closeModal();
+            window.location.href = "{% url 'role_user:delete_role_user' 0 %}".replace(0, Id);
+        }
+    </script>
+{% endblock script %}
