@@ -18,7 +18,7 @@ def list_setting(request):
     return render(request, "setting/list.html", context) 
 
 
-@login_required(login_url='user:login')
+# @login_required(login_url='user:login')
 def add_setting(request):
     context = {
         'title': 'Ajouter un Paramètre',
@@ -26,18 +26,23 @@ def add_setting(request):
         'h1': 'Nouveau Paramètre',
     }
 
+    app_settings = AppSettingModel.objects.all()
+
     if request.method == "POST":
         form = AppSettingForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("setting:list_setting")
+            return redirect("school:add_school")
         else:
             print('erreur')
     else:
         form = AppSettingForm()
     context['form'] = form
 
-    return render(request, "setting/form.html", context) 
+    if not app_settings:
+        return render(request, "setting/form.html", context) 
+    else:
+        return redirect('school:add_school')
 
 
 @login_required(login_url='user:login')
@@ -72,3 +77,11 @@ def delete_setting(request, id):
     setting.status = False
     setting.save()
     return redirect('setting:list_setting') 
+
+def check_settings(request):
+    app_settings = AppSettingModel.objects.all()
+    return redirect('school:check_school') if app_settings else redirect('setting:add_setting')
+    # if not app_settings:
+    #     return redirect('setting:add_setting')
+    # else:
+    #     return redirect('school:check_school')

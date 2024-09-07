@@ -1,5 +1,5 @@
 from django.db import models
-from base.models.helpers.person_model import PersonModel
+from base.models.person_model import PersonModel
 
 
 # Create your models here.

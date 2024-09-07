@@ -20,14 +20,13 @@
                     {% if messages %}
                     <div class="messages">
                         {% for message in messages %}
-                            {% if message.error %}
-                                <div class="{{ message.tags }}" style="color: red;">{{ message }}</div>
-                            {% endif %}
+                            <div class="{{ message.tags }}" style="color: red;">{{ message }}</div>
                         {% endfor %}
                     </div>
                     {% endif %}
                     <form method="post" action="{% url 'user:login' %}" class="register-form" id="login-form">
-                        <input type="hidden" name="next" value="{{ next }}">
+                        <!-- <input type="hidden" name="next" value="{{ next }}"> -->
+                        <input type="hidden" name="next" value="{{ request.GET.next }}">
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>

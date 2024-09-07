@@ -1,0 +1,35 @@
+ #modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    height: 300px;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 35px 45px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 300px;
+    text-align: center;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content h2{
+    color: red;
+    /* box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2); */
+
+}
+
+.modal-content button{
+    color: red;
+    box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    margin: 10px 20px;
+}
+
+.modal-content button:hover{
+    background-color: red;
+    box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    color: bisque;
+}

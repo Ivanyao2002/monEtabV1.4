@@ -11,6 +11,7 @@ from user.models.user_model import UserModel
 
 @login_required(login_url='user:login')
 def list_student(request):
+    
 
     student_list =  StudentModel.objects.filter(status=True, active=True)
 

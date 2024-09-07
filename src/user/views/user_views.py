@@ -10,18 +10,20 @@ from ..forms.user_form import UserForm
 
 def sign_in(request):
 
+    if request.user.is_authenticated:
+        messages.success(request, 'Vous êtes déjà connecté !!')
+        return redirect('dashboard:index')
+
     if request.method == 'POST':
 
         username = request.POST.get('username')
         password = request.POST.get('password')
+        next_url = request.POST.get('next')
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            next = request.GET.get('next', '') 
-            if next:
-                return redirect(next)
-            else:
-                return redirect('dashboard:index')
+            messages.success(request, 'Connexion Réussie !!')
+            return redirect(next_url if next_url else 'dashboard:index')
 
         else:
             messages.error(request, 'Veuillez verifier vos identifiants')
@@ -52,17 +54,25 @@ def register(request):
 
 def log_out(request):
     logout(request)
+    messages.success(request, 'Vous êtes bien déconnecté !!')
     return redirect('user:login')  
 
  
 @login_required(login_url='user:login')
 def list_user(request):
+    context = {}
+    search_field = request.GET.get('search')
+    if search_field:
+        users = UserModel.objects.filter(username__icontains=search_field, is_active=True)
+        context['users'] = users
+        context['search_field'] = search_field
+    else:
+        user_list =  UserModel.objects.filter(is_active=True)
+        context['users'] = user_list
 
-    user_list =  UserModel.objects.filter(is_active=True)
-
-    context = {
-        'users': user_list
-    }
+    # context = {
+    #     'users': user_list
+    # }
     return render(request, "user/list.html", context) 
 
 

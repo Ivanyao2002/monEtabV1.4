@@ -18,7 +18,7 @@ def list_school(request):
     return render(request, "school/list.html", context) 
 
 
-@login_required(login_url='user:login')
+# @login_required(login_url='user:login')
 def add_school(request):
     context = {
         'title': 'Ajouter une Ecole',
@@ -30,14 +30,21 @@ def add_school(request):
         form = SchoolForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("school:list_school")
+            return redirect("dashboard:index")
         else:
             print('erreur')
     else:
         form = SchoolForm()
     context['form'] = form
 
-    return render(request, "school/form.html", context) 
+    schools = SchoolModel.objects.all()
+    if not schools:
+        return render(request, "school/form.html", context) 
+    else:
+        return redirect('dashboard:index')
+        # return redirect('school:add_school')   
+
+    
 
 
 @login_required(login_url='user:login')
@@ -71,3 +78,12 @@ def delete_school(request, id):
     school.status = False
     school.save()
     return redirect('school:list_school') 
+
+
+def check_school(request):
+    schools = SchoolModel.objects.all()
+    return redirect('dashboard:index') if schools else redirect('school:add_school')
+    # if schools:
+    #     return redirect('dashboard:index')
+    # else:
+    #     return redirect('school:add_school')

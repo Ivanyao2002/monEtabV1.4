@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from .date_time_model import DateTimeModel
-from ..gender_ennum import GenderEnum
+from .helpers.date_time_model import DateTimeModel
+from .gender_ennum import GenderEnum
 
 
 # Create your models here.

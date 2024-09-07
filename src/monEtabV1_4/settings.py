@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # Installed package
     'crispy_forms',
     'crispy_bootstrap5',
+    'rest_framework',
 
     # Custom apps
     'base.apps.BaseConfig',
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
     'dashboard.apps.DashboardConfig',
     'student.apps.StudentConfig',
     'teacher.apps.TeacherConfig',
+    'api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [
@@ -116,6 +118,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = "user.UserModel"
+LOGIN_URL = "user:login"
+LOGIN_REDIRECT_URL = "dashboard:index"
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
