@@ -6,6 +6,6 @@ from django.db import models
 
 class GenderEnum(models.TextChoices):
     
-    MALE  = "H", _("Homme")
-    FEMALE  = "F", _("Femme")
-    OTHER  = "O", _("Autre")
+    MEN  = "Homme", _("Homme")
+    WOMEN  = "Femme", _("Femme")
+    OTHER  = "Autre", _("Autre")

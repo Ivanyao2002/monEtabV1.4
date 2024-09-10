@@ -18,9 +18,9 @@ def index(request):
     all_students = StudentModel.objects.filter(status=True).count()
     all_student_cards = StudentCardsModel.objects.filter(status=True).count()
     all_absences = AbsenceModel.objects.filter(status=True).count()
-    all_students_man = StudentModel.objects.filter(gender='H', status=True).count()
-    all_students_woman = StudentModel.objects.filter(gender='F', status=True).count()
-    all_students_other = StudentModel.objects.filter(gender='O', status=True).count()
+    all_students_man = StudentModel.objects.filter(gender='Homme', status=True).count()
+    all_students_woman = StudentModel.objects.filter(gender='Femme', status=True).count()
+    all_students_other = StudentModel.objects.filter(gender='Autre', status=True).count()
 
     context = {
         'all_users': all_users,

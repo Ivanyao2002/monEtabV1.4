@@ -42,17 +42,28 @@
     {% block title %}
         <title>Kaiadmin - MonEtab</title>
     {% endblock title %}
+    {% block style %}
+      
+    {% endblock style %}
 </head>
 <body>
     <div class="wrapper">
         <!-- Sidebar -->
-            {% include 'partials/sidebar.html' %}
+        {% if user.is_authenticated %}
+            {% block Sidebar %}
+                {% include 'partials/sidebar.html' %}
+            {% endblock Sidebar %}
+        {% endif %}
         <!-- End Sidebar -->
 
         <!-- main -->
         <div class="main-panel">
             <!-- Header -->
-                {% include 'partials/header.html' %}
+            {% if user.is_authenticated %}
+                {% block Header %}
+                    {% include 'partials/header.html' %}
+                {% endblock Header %}
+            {% endif %}
             <!-- End Header -->
 
             <!-- Container -->
@@ -62,13 +73,21 @@
             <!-- End Container -->
 
             <!-- Footer -->
-                {% include 'partials/footer.html' %}
+            {% if user.is_authenticated %}
+                {% block Footer %}
+                    {% include 'partials/footer.html' %}
+                {% endblock Footer %}
+            {% endif %}
             <!-- End Footer -->
         </div>
         <!--  End main  -->
 
         <!-- Custom settings -->
-            {% include 'partials/custom.html' %}
+        {% if user.is_authenticated %}
+            {% block Custom_settings %}
+                {% include 'partials/custom.html' %}
+            {% endblock Custom_settings %}
+        {% endif %}
         <!-- End Custom settings -->
     </div>
     <!--  All scripts  -->
@@ -80,7 +99,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             
             const messages = document.querySelectorAll('.messages');
-            const duration = 5000;
+            const duration = 1200;
     
             messages.forEach(function(message) {
                 setTimeout(function() {

@@ -20,6 +20,7 @@ def list_absence(request):
 
 @login_required(login_url='user:login')
 def add_absence(request):
+
     context = {
         'title': 'Ajouter une Absence',
         'submit_value': 'Ajouter',
@@ -30,9 +31,10 @@ def add_absence(request):
         form = AbsenceForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "Absence ajoutée avec succès !")
             return redirect("absence:list_absence")
         else:
-            print('erreur')
+            messages.error(request, "Erreur lors de l'enregistrement, veuillez vérifier les champs !")
     else:
         form = AbsenceForm()
     context['form'] = form
@@ -43,20 +45,22 @@ def add_absence(request):
 @login_required(login_url='user:login')
 def edit_absence(request, id):
 
-    absence = AbsenceModel.objects.get(id = id)
     context = {
         'title': 'Modifier l\'Absence',
         'submit_value': 'Modifier',
         'h1': 'Modifier Absence',
     }
+
+    absence = AbsenceModel.objects.get(id = id)
+
     if request.method == "POST":
         absence_form = AbsenceForm(request.POST, instance=absence)
         if absence_form.is_valid():
             absence_form.save()
+            messages.success(request, "Absence modifiée avec succès !")
             return redirect("absence:list_absence")
         else:
             messages.error(request, "Erreur dans le formulaire. Veuillez vérifier les champs.")
-
 
     absence_form = AbsenceForm(instance=absence)
     context['form'] = absence_form
@@ -66,8 +70,9 @@ def edit_absence(request, id):
 
 @login_required(login_url='user:login')
 def delete_absence(request, id):
+    
     absence = get_object_or_404(AbsenceModel, id=id)
-    # absence.delete()
     absence.status = False
     absence.save()
+    messages.success(request, "Absence suprimée avec succès !")
     return redirect('absence:list_absence') 

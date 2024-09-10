@@ -6,10 +6,8 @@ from django.contrib.auth.models import AbstractUser
 
 class UserModel(AbstractUser):
 
-    school = models.ForeignKey("school.SchoolModel", on_delete=models.CASCADE, null=True)  
-    role = models.ForeignKey("user.RoleUserModel", on_delete=models.SET_NULL, null=True)
-    # pseudo = models.CharField(max_length=255)
-    # password = models.CharField(max_length=255)
+    school = models.ForeignKey("school.SchoolModel", on_delete=models.CASCADE)  
+    role = models.ManyToManyField("user.RoleUserModel")
 
     def __str__(self):
         return f"{self.username}"    

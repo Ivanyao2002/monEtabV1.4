@@ -1,49 +1,57 @@
 {% extends "base.html" %}
+
 {% load crispy_forms_tags %}
 
 {% block title %}
     <title>MonEtab - Setting</title>
 {% endblock title %}
 
+
 <!-- Container -->
 {% block container %}
 
     <div class="container">
         <div class="page-inner">
-            <div class="page-header">
+            <!-- <div class="page-header">
                 <h3 class="fw-bold mb-3">{{ title }}</h3>
-                <ul class="breadcrumbs mb-3">
-                    <li class="nav-home">
-                        <a href="/">
-                            <i class="icon-home"></i>
-                        </a>
-                    </li>
-                    <li class="separator">
-                        <i class="icon-arrow-right"></i>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#">Paramètre d'application</a>
-                    </li>
-                    <li class="separator">
-                        <i class="icon-arrow-right"></i>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#">{{ h1 }}</a>
-                    </li>
-                </ul>
-            </div>
+                {% if app_settings %}
+
+                    <ul class="breadcrumbs mb-3">
+                        <li class="nav-home">
+                            <a href="/">
+                                <i class="icon-home"></i>
+                            </a>
+                        </li>
+                        <li class="separator">
+                            <i class="icon-arrow-right"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'setting:list_setting' %}">Paramètre d'application</a>
+                        </li>
+                        <li class="separator">
+                            <i class="icon-arrow-right"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">{{ h1 }}</a>
+                        </li>
+                    </ul>
+                  
+                {% endif %}
+            </div> -->
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">
+                        <!-- <div class="card-header">
                             <div class="d-flex align-items-center">
                                 <div class="card-title">{{ h1 }}</div>
-                                <button class="btn btn-primary btn-round ms-auto"  id="listButton" >
-                                    <i class="icon-list"></i>
-                                    Listes des Paramètres
-                                </button>
+
+                                    <button class="btn btn-primary btn-round ms-auto"  id="listButton" >
+                                        <i class="icon-list"></i>
+                                        Retour
+                                    </button>
+
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="card-body">
                             <form method="POST" id="birth-form" action="">

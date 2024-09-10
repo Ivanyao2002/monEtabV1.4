@@ -12,7 +12,7 @@ class PersonModel(DateTimeModel):
     address = models.OneToOneField('base.AdressModel', on_delete=models.SET_NULL, null=True)
     first_name = models.CharField(max_length=30, verbose_name="Nom ")
     last_name = models.CharField(max_length=60, verbose_name="Prénoms ")
-    gender = models.CharField(max_length=1, choices=GenderEnum.choices, default=GenderEnum.MALE, verbose_name="Genre ")
+    gender = models.CharField(max_length=10, choices=GenderEnum.choices, default=GenderEnum.MEN, verbose_name="Genre ")
     birthday = models.DateField(verbose_name="Date de naissance ") 
     phone_number = models.CharField(max_length=15, verbose_name="Téléphone ")
     url_picture = models.CharField(max_length=255, verbose_name="Lien de l'image ")

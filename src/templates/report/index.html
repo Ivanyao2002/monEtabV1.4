@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>MonEtab - Report</title>
+{% endblock title %}
+
+<!-- Container -->
+{% block container %}
+
+    <div class="container">
+        <div class="page-inner">
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert-success" style="color: rgb(0, 255, 13);">{{ message }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <div class="page-header">
+                <h3 class="fw-bold mb-3">Tirer un Rapport</h3>
+                <ul class="breadcrumbs mb-3">
+                    <li class="nav-home">
+                        <a href="/">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="separator">
+                        <i class="fas fa-angle-right"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">Rapports</a>
+                    </li>
+                </ul>
+            </div>
+
+            <form action="" method="get">
+                <div class="form-group">
+                    <label for="largeSelect"></label>
+                    <select class="form-select form-control-lg" id="largeSelect" name="select">
+                    <option  value="" disabled selected>.... Sélectionner une option ....</option>
+                    <option value="students">Liste des élèves</option>
+                    <option value="teachers">Liste des professeurs</option>
+                    <option value="users">Liste des utilisateurs</option>
+                    </select>
+                </div>    
+
+                <div class="card-action">
+                    <button type="submit" class="btn btn-success" id="pdf" name="format" value="pdf">
+                        <i class="fas fa-file-pdf"></i>
+                        Générer format PDF
+                    </button>
+                    <button type="submit" class="btn btn-danger" id="excel" name="format" value="excel">
+                        <i class="fas fa-file-excel"></i>
+                        Générer format Excel
+                    </button>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+
+{% endblock container %}
+<!-- End Container -->

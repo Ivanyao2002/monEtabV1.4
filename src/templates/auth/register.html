@@ -11,7 +11,7 @@
     <div class="container">
         <div class="signup-content">
             <div class="signup-form">
-                <h2 class="form-title">S'inscrire</h2>
+                <h2 class="form-title">Compte Administrateur</h2>
                 {% if messages %}
                 <div class="messages">
                     {% for message in messages %}
@@ -37,13 +37,12 @@
                     </div>
 
                     <div class="form-group form-button">
-                        <input type="submit" name="signup" id="signup" class="form-submit" value="S'inscrire"/>
+                        <input type="submit" name="signup" id="signup" class="form-submit" value="Enregistrer"/>
                     </div>
                 </form>
             </div>
             <div class="signup-image">
                 <figure><img src="{% static 'assets/img/signup-image.jpg' %}" alt="sing up image"></figure>
-                <a href="{% url 'user:login' %}" class="signup-image-link">Vous avez déjà un compte ?</a>
             </div>
         </div>
     </div>

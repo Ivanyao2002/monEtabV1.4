@@ -1,0 +1,1 @@
+UPDATE teacher_teachermodel SET active = True WHERE active = FALSE;

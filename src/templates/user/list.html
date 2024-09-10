@@ -38,10 +38,7 @@
                     </li>
                 </ul>
             </div>
-            <form method="GET">
-                <input type="text" id="myInput" name="search" value="{{search_field}}" placeholder="Rechercher...">
-                <button onclick=""> Rechercher</button>
-            </form>
+            
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
@@ -64,7 +61,8 @@
                                             <th>Ecole</th>
                                             <th>Rôle</th>
                                             <th>Date de création</th>
-                                            <th style="width: 10%">Action</th>
+                                            <th>Status</th>
+                                            <th style="width: 10%; text-align: center;">Action</th>
                                         </tr>
                                     </thead>
 
@@ -74,7 +72,8 @@
                                             <th>Ecole</th>
                                             <th>Rôle</th>
                                             <th>Date de création</th>
-                                            <th style="width: 10%">Action</th>
+                                            <th>Status</th>
+                                            <th style="width: 10%; text-align: center;">Action</th>
                                         </tr>   
                                     </tfoot>
                                     <tbody>
@@ -82,8 +81,22 @@
                                         <tr>
                                             <td>{{ user.username|capfirst}}</td>
                                             <td>{% if user.school %} {{ user.school }} {% else %} Aucune {% endif %}</td>
-                                            <td>{% if user.school %} {{ user.role }} {% else %} Aucun {% endif %}</td>
+                                            <td>
+                                                {% if user.role.all %}   
+                                                    {% for role in user.role.all %}
+                                                        {{ role.role }}{% if not forloop.last %}, {% endif %}
+                                                    {% endfor %}
+                                                {% else %}
+                                                    Aucun
+                                                {% endif %}
+                                            </td>
                                             <td>{{ user.date_joined|date:"D d M Y"}}</td>
+                                            <td>{% if user.is_active %}  
+                                                    <span class="badge badge-success">Actif</span>
+                                                {% else %} 
+                                                    <span class="badge badge-danger">Inactif</span> 
+                                                {% endif %}
+                                            </td>
                                             <td>
                                                 <div class="form-button-action">
                                                     <button type="button" data-bs-toggle="tooltip" title="Modifier" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
@@ -91,9 +104,12 @@
                                                             <i class="fa fa-edit"></i>
                                                         </a>
                                                     </button>
-                                                    <!-- <button type="button" data-bs-toggle="tooltip" data-id="{{user.id}}" onclick="showModal(this)" title="Supprimer" class="btn btn-link btn-danger" data-original-title="Remove">
-                                                        <i class="icon-trash"></i>
-                                                    </button> -->
+                                                    {% if user.is_active %}
+                                                      <button type="button" class="btn nav-link btn-danger btn-link rounded btn-lg" data-bs-toggle="tooltip" data-id="{{user.id}}" onclick="showModal(this)" title="Bloquer">Désactiver</button>
+                                                    {% else %}
+                                                      <button type="button" class="btn nav-link btn-success btn-link btn-lg" data-bs-toggle="tooltip" data-id="{{user.id}}" onclick="showModalActivate(this)" title="Activer">Activer</button>
+                                                    {% endif %}
+
                                                 </div>
                                             </td>
                                         </tr>
@@ -110,9 +126,17 @@
     <div class="modal" id="modal">
         <div class="modal-content">
             <h2>ATTENTION !!</h2>
-            <p>Voulez-vous vraiment supprimer cet utilisateur ?</p>
+            <p>Voulez-vous vraiment désactivez le compte de cet utilisateur ?</p>
             <button onclick="closeModal()">Non</button>
             <button onclick="confirmDelete()">Oui</button>
+        </div>
+    </div>
+    <div class="modal" id="modal_activation">
+        <div class="modal-content">
+            <h2>ATTENTION !!</h2>
+            <p>Voulez-vous activer le compte de cet utilisateur ?</p>
+            <button onclick="closeModal()">Non</button>
+            <button onclick="confirmActivate()">Oui</button>
         </div>
     </div>
 {% endblock container %}
@@ -137,13 +161,23 @@
             document.getElementById('modal').style.display = 'flex';  
         }
 
+        function showModalActivate(buttonElement) {
+            Id = buttonElement.getAttribute('data-id');  
+            document.getElementById('modal_activation').style.display = 'flex';  
+        }                
+
         function closeModal() {
             document.getElementById('modal').style.display = 'none';     
+            document.getElementById('modal_activation').style.display = 'none';     
         }
 
         function confirmDelete() {
             closeModal();
-            window.location.href = "{% url 'user:delete_user' 0 %}".replace(0, Id);
+            window.location.href = "{% url 'user:deactivate_user' 0 %}".replace(0, Id);
+        }
+        function confirmActivate() {
+            closeModal();
+            window.location.href = "{% url 'user:activate_user' 0 %}".replace(0, Id);
         }
     </script>
 {% endblock script %}

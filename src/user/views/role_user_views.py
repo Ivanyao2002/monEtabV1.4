@@ -20,6 +20,7 @@ def list_role_user(request):
 
 @login_required(login_url='user:login')
 def add_role_user(request):
+    
     context = {
         'title': 'Ajouter un Rôle Utilisateur',
         'submit_value': 'Ajouter',
@@ -30,9 +31,10 @@ def add_role_user(request):
         form = RoleUserForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "Rôle ajouté avec succès !")
             return redirect("role_user:list_role_user")
         else:
-            print('erreur')
+            messages.error(request, "Erreur lors de l'enregistrement, veuillez vérifier les champs !")
     else:
         form = RoleUserForm()
     context['form'] = form
@@ -41,22 +43,24 @@ def add_role_user(request):
 
 
 @login_required(login_url='user:login')
-def edit_role_user(request, id):
+def edit_role_user(request, role):
 
-    role_user = RoleUserModel.objects.get(id = id)
     context = {
         'title': 'Modifier le Rôle de l\'Utilisateur',
         'submit_value': 'Modifier',
         'h1': 'Modifier Rôle Utilisateur',
     }
+
+    role_user = RoleUserModel.objects.get(role = role)
+
     if request.method == "POST":
         role_user_form = RoleUserForm(request.POST, instance=role_user)
         if role_user_form.is_valid():
             role_user_form.save()
+            messages.success(request, "Rôle modifié avec succès !")
             return redirect("role_user:list_role_user")
         else:
             messages.error(request, "Erreur dans le formulaire. Veuillez vérifier les champs.")
-
 
     role_user_form = RoleUserForm(instance=role_user)
     context['form'] = role_user_form
@@ -65,9 +69,10 @@ def edit_role_user(request, id):
 
 
 @login_required(login_url='user:login')
-def delete_role_user(request, id):
-    role_user = get_object_or_404(RoleUserModel, id=id)
-    # role_user.delete()
+def delete_role_user(request, role):
+
+    role_user = get_object_or_404(RoleUserModel, role=role)
     role_user.status = False
     role_user.save()
+    messages.success(request, "Rôle suprimé avec succès !")
     return redirect('role_user:list_role_user') 

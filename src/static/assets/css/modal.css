@@ -1,4 +1,4 @@
- #modal {
+ #modal, #modal_activation {
     position: fixed;
     top: 50%;
     left: 50%;

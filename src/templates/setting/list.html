@@ -10,14 +10,14 @@
     <div class="container">
         <div class="page-inner">
             {% if messages %}
-            <div class="messages">
-                {% for message in messages %}
-                    <div class="alert-success" style="color: rgb(0, 255, 13);">{{ message }}</div>
-                {% endfor %}
-            </div>
+                <div class="messages">
+                    {% for message in messages %}
+                        <div class="alert-success" style="color: rgb(0, 255, 13);">{{ message }}</div>
+                    {% endfor %}
+                </div>
             {% endif %}
             <div class="page-header">
-                <h3 class="fw-bold mb-3">Liste des Paramètres d'application</h3>
+                <h3 class="fw-bold mb-3">Paramètre d'application</h3>
                 <ul class="breadcrumbs mb-3">
                     <li class="nav-home">
                         <a href="/">
@@ -30,18 +30,12 @@
                     <li class="nav-item">
                         <a href="#">Paramètre d'application</a>
                     </li>
-                    <li class="separator">
-                        <i class="icon-arrow-right"></i>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#">Liste des Paramètres</a>
-                    </li>
                 </ul>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">
+                        <!-- <div class="card-header">
                             <div class="d-flex align-items-center">
                                 <h4 class="card-title">Paramètres</h4>
                                 <button class="btn btn-primary btn-round ms-auto"  id="addButton" >
@@ -49,7 +43,7 @@
                                     Ajouter un Paramètre
                                 </button>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="card-body">
 
                             <div class="table-responsive">
@@ -84,9 +78,9 @@
                                                             <i class="fa fa-edit"></i>
                                                         </a>
                                                     </button>
-                                                    <button type="button" data-bs-toggle="tooltip" data-id="{{setting.id}}" onclick="showModal(this)" title="Supprimer" class="btn btn-link btn-danger" data-original-title="Remove">
+                                                    <!-- <button type="button" data-bs-toggle="tooltip" data-id="{{setting.id}}" onclick="showModal(this)" title="Supprimer" class="btn btn-link btn-danger" data-original-title="Remove">
                                                         <i class="icon-trash"></i>
-                                                    </button>
+                                                    </button> -->
                                                 </div>
                                             </td>
                                         </tr>
@@ -117,12 +111,10 @@
             $('#addButton').click(function () {
                 window.location.href = "{% url 'setting:add_setting' %}";
             });
-            $('#add-row').DataTable({
-            pageLength: 4,
-            });
         });
     </script>
-    <script>
+    
+    <!-- <script>
         let Id;
 
         function showModal(buttonElement) {
@@ -136,7 +128,9 @@
 
         function confirmDelete() {
             closeModal();
+            {% comment %}
             window.location.href = "{% url 'setting:delete_setting' 0 %}".replace(0, Id);
+            {% endcomment %}
         }
-    </script>
+    </script> -->
 {% endblock script %}

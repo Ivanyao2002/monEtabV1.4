@@ -1,26 +1,38 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'assets/fonts/material-icon/css/material-design-iconic-font.min.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
-    {% block title %}
-        <title>Document</title>
-    {% endblock title %}
-</head>
-<body>
-    
-      <div class="main">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'assets/fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+        {% block title %}
+            <title>Document</title>
+        {% endblock title %}
+    </head>
+    <body>
+        
+        <div class="main">
         {% block body %}
 
-
         {% endblock body %}
-      </div>
+        </div>
 
-    <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'assets/js/main.js' %}"></script>
+        <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'assets/js/main.js' %}"></script>
+        
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            const messages = document.querySelectorAll('.messages');
+            const duration = 5000;
     
-</body>
+            messages.forEach(function(message) {
+                setTimeout(function() {
+                    message.style.display = 'none';
+                }, duration);
+            });
+        });
+        </script>
+    </body>
 </html>

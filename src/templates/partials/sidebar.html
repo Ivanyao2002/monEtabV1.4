@@ -1,5 +1,24 @@
 {% load static %}
 
+{% url 'dashboard:index' as dashboard_index_url %}
+{% url 'setting:edit_setting' as edit_setting_url %}
+{% url 'teacher:add_teacher' as add_teacher_url %}
+{% url 'teacher:list_teacher' as list_teacher_url %}
+{% url 'student:add_student' as add_student_url %}
+{% url 'student:list_student' as list_student_url %}
+{% url 'student_cards:list_student_card' as list_student_card_url %}
+{% url 'student_cards:add_student_card' as add_student_card_url %}
+{% url 'absence:add_absence' as add_absence_url %}
+{% url 'absence:list_absence' as list_absence_url %}
+{% url 'adress:list_adress' as list_adress_url %}
+{% url 'adress:add_adress' as add_adress_url %}
+{% url 'role_user:add_role_user' as add_role_user_url %}
+{% url 'role_user:list_role_user' as list_role_user_url %}
+{% url 'user:list_user' as list_user_url %}
+{% url 'user:add_user' as add_user_url %}
+{% url 'report:index' as report_index_url %}
+{% url 'school:edit_school' as edit_school_url %}
+
 <div class="sidebar" data-background-color="dark">
     <div class="sidebar-logo">
         <!-- Logo Header -->
@@ -24,7 +43,7 @@
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
         <div class="sidebar-content">
             <ul class="nav nav-secondary">
-                <li class="nav-item active">
+                <li class="nav-item {% if request.path == dashboard_index_url %}active{% endif %}">
                     <a href="/" class="collapsed" aria-expanded="true">
                         <i class="fas fa-home"></i>
                         <p> Tableau de bord </p>
@@ -36,7 +55,7 @@
                 </span>
                     <h4 class="text-section">Navigation</h4>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {% if request.path == add_teacher_url or request.path == list_teacher_url %} active {% endif %}">
                     <a data-bs-toggle="collapse" href="#base">
                         <i class="fas fa-layer-group"></i>
                         <p> Professeur </p>
@@ -59,7 +78,7 @@
                     </div>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item {% if request.path == add_student_url or request.path == list_student_url %}active{% endif %}">
                     <a data-bs-toggle="collapse" href="#sidebarLayouts">
                         <i class="fas fa-layer-group"></i>
                         <p> Elève </p>
@@ -82,7 +101,7 @@
                     </div>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item {% if request.path == add_student_card or request.path == list_student_card_url %}active{% endif %}">
                     <a data-bs-toggle="collapse" href="#mserv">
                         <i class="fas fa-layer-group"></i>
                         <p> Carte Elève </p>
@@ -104,7 +123,7 @@
                     </div>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item {% if request.path == add_absence_url or request.path == list_absence_url %}active{% endif %}">
                     <a data-bs-toggle="collapse" href="#sub">
                         <i class="fas fa-layer-group"></i>
                         <p> Absence </p>
@@ -126,29 +145,7 @@
                     </div>
                 </li>
 
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#maps">
-                        <i class="fas fa-layer-group"></i>
-                        <p> Ecole </p>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="collapse" id="maps">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="{% url 'school:add_school' %}">
-                                    <span class="sub-item">Nouvelle Ecole</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{% url 'school:list_school' %}">
-                                    <span class="sub-item">Liste des Ecoles</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="nav-item">
+                <li class="nav-item {% if request.path == add_adress_url or request.path == list_adress_url %}active{% endif %}">
                     <a data-bs-toggle="collapse" href="#mape">
                         <i class="fas fa-layer-group"></i>
                         <p> Adresse </p>
@@ -170,7 +167,7 @@
                     </div>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item {% if request.path == add_role_user_url or request.path == list_role_user_url %}active{% endif %}">
                     <a data-bs-toggle="collapse" href="#mapee">
                         <i class="fas fa-layer-group"></i>
                         <p> Rôle Utilisateur </p>
@@ -192,7 +189,7 @@
                     </div>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item {% if request.path == add_user_url or request.path == list_user_url %}active{% endif %}">
                     <a data-bs-toggle="collapse" href="#mpee">
                         <i class="fas fa-layer-group"></i>
                         <p> Utilisateur </p>
@@ -213,29 +210,28 @@
                         </ul>
                     </div>
                 </li>
-
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#map">
-                        <i class="icon-settings"></i>
-                        <p> Paramètre d'application </p>
-                        <span class="caret"></span>
+ 
+                <li class="nav-item {% if request.path == report_index_url %}active{% endif %}">
+                    <a href="{% url 'report:index' %}" class="collapsed" aria-expanded="true">
+                        <i class="fas fa-file"></i>
+                        <span class="sub-item">Rapports</span>
                     </a>
-                    <div class="collapse" id="map">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="{% url 'setting:add_setting' %}">
-                                    <span class="sub-item">Nouveau Paramètre</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{% url 'setting:list_setting' %}">
-                                    <span class="sub-item">Liste des Paramètres</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
 
+                <li class="nav-item {% if request.path == edit_school_url %}active{% endif %}">
+                    <a href="{% url 'school:edit_school' %}" class="collapsed" aria-expanded="true">
+                        <i class="icon-settings"></i>
+                        <span class="sub-item">Paramètre de l'Ecole</span>
+                    </a>
+                </li>
+
+                <li class="nav-item {% if request.path == edit_setting_url %}active{% endif %}">
+                    <a href="{% url 'setting:edit_setting' %}" class="collapsed" aria-expanded="true">
+                        <i class="icon-settings"></i>
+                        <span class="sub-item">Paramètre d'application</span>
+                    </a>
+                </li>
+                
             </ul>
         </div>
     </div>

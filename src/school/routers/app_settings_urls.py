@@ -7,6 +7,6 @@ urlpatterns = [
     path('', check_settings, name= 'check_settings'),
     path('add-setting/', add_setting, name='add_setting'),
     path('list-setting/', list_setting, name='list_setting'),
-    path('edit-setting/<int:id>', edit_setting, name='edit_setting'),
-    path('delete-setting/<int:id>', delete_setting, name='delete_setting'),
+    path('edit-setting/', edit_setting, name='edit_setting'),
+    # path('delete-setting/<int:id>', delete_setting, name='delete_setting'),
 ]

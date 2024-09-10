@@ -6,7 +6,7 @@ class SchoolForm(forms.ModelForm):
 
     class Meta:
         model = SchoolModel
-        fields = ['app_settings', 'name', 'url_logo']
+        fields = ['name', 'url_logo']
 
         labels ={
             "name": "Nom de l'école",

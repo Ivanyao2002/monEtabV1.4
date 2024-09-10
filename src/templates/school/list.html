@@ -41,7 +41,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">
+                        <!-- <div class="card-header">
                             <div class="d-flex align-items-center">
                                 <h4 class="card-title">Ecoles</h4>
                                 <button class="btn btn-primary btn-round ms-auto"  id="addButton" >
@@ -49,7 +49,7 @@
                                     Ajouter une école
                                 </button>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="card-body">
 
                             <div class="table-responsive">
@@ -84,9 +84,6 @@
                                                             <i class="fa fa-edit"></i>
                                                         </a>
                                                     </button>
-                                                    <button type="button" data-bs-toggle="tooltip" data-id="{{school.id}}" onclick="showModal(this)" title="Supprimer" class="btn btn-link btn-danger" data-original-title="Remove">
-                                                        <i class="icon-trash"></i>
-                                                    </button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -100,43 +97,6 @@
             </div>
         </div>
     </div>
-    <div class="modal" id="modal">
-        <div class="modal-content">
-            <h2>ATTENTION !!</h2>
-            <p>Voulez-vous vraiment supprimer cette école ?</p>
-            <button onclick="closeModal()">Non</button>
-            <button onclick="confirmDelete()">Oui</button>
-        </div>
-    </div>
+
 {% endblock container %}
-<!-- End Container -->
-
-{% block script %}
-    <script>
-        $(document).ready(function () {
-            $('#addButton').click(function () {
-                window.location.href = "{% url 'school:add_school' %}";
-            });
-            $('#add-row').DataTable({
-            pageLength: 5,
-            });
-        });
-    </script>
-    <script>
-        let Id;
-
-        function showModal(buttonElement) {
-            Id = buttonElement.getAttribute('data-id');  
-            document.getElementById('modal').style.display = 'flex';  
-        }
-
-        function closeModal() {
-            document.getElementById('modal').style.display = 'none';     
-        }
-
-        function confirmDelete() {
-            closeModal();
-            window.location.href = "{% url 'school:delete_school' 0 %}".replace(0, Id);
-        }
-    </script>
-{% endblock script %}
+<!-- End Container -->  

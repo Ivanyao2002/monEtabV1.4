@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'rest_framework',
+    'django_seed',
 
     # Custom apps
     'base.apps.BaseConfig',
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
     'student.apps.StudentConfig',
     'teacher.apps.TeacherConfig',
     'api.apps.ApiConfig',
+    'report.apps.ReportConfig',
 ]
 
 MIDDLEWARE = [
@@ -76,6 +78,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # Custom 
+                'base.utils.context_processors.get_element',
             ],
         },
     },
@@ -90,7 +95,7 @@ WSGI_APPLICATION = 'monEtabV1_4.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'monEtab',
+        'NAME': 'etab_BD',
         'USER': 'postgres',
         'PASSWORD': 'ivan',
         'HOST': 'localhost',        

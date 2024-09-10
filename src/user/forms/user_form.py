@@ -1,5 +1,11 @@
+from typing import Any, Mapping
 from django.contrib.auth.forms import UserCreationForm
+from django.core.files.base import File
+from django.db.models.base import Model
+from django.forms.utils import ErrorList
 from user.models.user_model import UserModel
+from user.models.role_user_model import RoleUserModel
+from school.models.school_model import SchoolModel
 from django import forms
 
 
@@ -62,4 +68,10 @@ class UserForm(forms.ModelForm):
         user.set_password(self.cleaned_data["password"]) 
         if commit:
             user.save()
+            user.role.set(self.cleaned_data.get('role', []))
         return user
+    
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        self.fields['role'].queryset = RoleUserModel.objects.filter(status=True).exclude(role='ADMINISTRATEUR')
+        self.fields['school'].queryset = SchoolModel.objects.filter(status=True)

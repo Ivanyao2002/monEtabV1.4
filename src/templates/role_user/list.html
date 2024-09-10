@@ -74,11 +74,11 @@
                                             <td>
                                                 <div class="form-button-action">
                                                     <button type="button" data-bs-toggle="tooltip" title="Modifier" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task">
-                                                        <a href="{% url 'role_user:edit_role_user' role_user.id  %}">
+                                                        <a href="{% url 'role_user:edit_role_user' role_user.role  %}">
                                                             <i class="fa fa-edit"></i>
                                                         </a>
                                                     </button>
-                                                    <button type="button" data-bs-toggle="tooltip" data-id="{{role_user.id}}" onclick="showModal(this)" title="Supprimer" class="btn btn-link btn-danger" data-original-title="Remove">
+                                                    <button type="button" data-bs-toggle="tooltip" data-role="{{role_user.role}}" onclick="showModal(this)" title="Supprimer" class="btn btn-link btn-danger" data-original-title="Remove">
                                                         <i class="icon-trash"></i>
                                                     </button>
                                                 </div>
@@ -117,10 +117,10 @@
         });
     </script>
     <script>
-        let Id;
+        let role;
 
         function showModal(buttonElement) {
-            Id = buttonElement.getAttribute('data-id');  
+            role = buttonElement.getAttribute('data-role');  
             document.getElementById('modal').style.display = 'flex';  
         }
 
@@ -130,7 +130,7 @@
 
         function confirmDelete() {
             closeModal();
-            window.location.href = "{% url 'role_user:delete_role_user' 0 %}".replace(0, Id);
+            window.location.href = "{% url 'role_user:delete_role_user' 0 %}".replace(0, role);
         }
     </script>
 {% endblock script %}

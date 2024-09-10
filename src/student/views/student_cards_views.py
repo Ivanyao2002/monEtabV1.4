@@ -20,6 +20,7 @@ def list_student_card(request):
 
 @login_required(login_url='user:login')
 def add_student_card(request):
+
     context = {
         'title': 'Ajouter une Carte élève',
         'submit_value': 'Ajouter',
@@ -30,9 +31,10 @@ def add_student_card(request):
         form = StudentCardForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "Carte élève ajoutée avec succès !")
             return redirect("student_cards:list_student_card")
         else:
-            print('erreur')
+            messages.error(request, "Erreur lors de l'enregistrement, veuillez vérifier les champs !")
     else:
         form = StudentCardForm()
     context['form'] = form
@@ -43,20 +45,22 @@ def add_student_card(request):
 @login_required(login_url='user:login')
 def edit_student_card(request, id):
 
-    student_card = StudentCardsModel.objects.get(id = id)
     context = {
         'title': 'Modifier la carte',
         'submit_value': 'Modifier',
         'h1': 'Modifier Carte Eleve',
     }
+
+    student_card = StudentCardsModel.objects.get(id = id)
+
     if request.method == "POST":
         student_card_form = StudentCardForm(request.POST, instance=student_card)
         if student_card_form.is_valid():
             student_card_form.save()
+            messages.success(request, "Carte élève modifiée avec succès !")
             return redirect("student_cards:list_student_card")
         else:
             messages.error(request, "Erreur dans le formulaire. Veuillez vérifier les champs.")
-
 
     student_card_form = StudentCardForm(instance=student_card)
     context['form'] = student_card_form
@@ -66,8 +70,9 @@ def edit_student_card(request, id):
 
 @login_required(login_url='user:login')
 def delete_student_card(request, id):
+
     student_card = get_object_or_404(StudentCardsModel, id=id)
-    # student_card.delete()
     student_card.status = False
     student_card.save()
+    messages.success(request, "Carte élève suprimée avec succès !")
     return redirect('student_cards:list_student_card') 

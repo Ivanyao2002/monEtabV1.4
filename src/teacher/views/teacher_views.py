@@ -39,8 +39,7 @@ def add_teacher(request):
             messages.success(request, 'Le professeur a été ajouté avec succès.')
             return redirect('teacher:list_teacher')
         else:
-            print(teacher_form.errors)
-            # print(user_form.errors)
+            messages.error(request, "Erreur lors de l'enregistrement, veuillez vérifier les champs !")
     else:
         teacher_form = TeacherForm()
         # user_form = UserForm()

@@ -42,7 +42,7 @@ def add_student(request):
             messages.success(request, 'L\'élève a été ajouté avec succès.')
             return redirect("student:list_student")
         else:
-            print('erreur')
+            messages.error(request, "Erreur lors de l'enregistrement, veuillez vérifier les champs !")
     else:
         student_form = StudentForm()
         # user_form = UserForm()
@@ -83,7 +83,7 @@ def edit_student(request, id):
 @login_required(login_url='login')
 def delete_student(request, id):
     student = get_object_or_404(StudentModel, id=id)
-    # user = get_object_or_404(UserModel, student=student)
+    user = get_object_or_404(UserModel, student=student)
     student.status = False
     student.active = False
     student.save()
